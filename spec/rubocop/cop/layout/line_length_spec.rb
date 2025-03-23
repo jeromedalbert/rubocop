@@ -754,6 +754,14 @@ RSpec.describe RuboCop::Cop::Layout::LineLength, :config do
 
               expect_no_corrections
             end
+
+            it 'correctly parses interpolations' do
+              expect_no_offenses(<<~RUBY)
+                <<~STR
+                  Hello \#{name}
+                STR
+              RUBY
+            end
           end
 
           context 'with interpolation' do
